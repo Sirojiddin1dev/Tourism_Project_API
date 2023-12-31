@@ -86,7 +86,7 @@ class Room(models.Model):
     kitchen = models.BooleanField(default=True)
     bathroom = models.BooleanField(default=True)
     human_capacity = models.IntegerField()
-    services = models.ManyToManyField(Service)
+    servic = models.ManyToManyField(Service)
     images = models.ManyToManyField(Image)
     cleaning = models.ForeignKey('CleaningRoom', on_delete=models.CASCADE)
     price_for_day = models.IntegerField()
@@ -98,12 +98,6 @@ class RoomReservation(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField()
-
-
-class OrderFoodToRoom(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    meals = models.ManyToManyField('Meal')
-    time = models.DateTimeField()
 
 
 class CleaningRoom(models.Model):
@@ -170,14 +164,17 @@ class Table(models.Model):
     code = models.CharField(max_length=255)
 
 
+class OrderFoodToRoom(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    meals = models.ManyToManyField(Meal)
+    time = models.DateTimeField()
+
+
 class Comment(models.Model):
     text = models.CharField(max_length=255)
     user = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.user.username
 
 
 class TableReservation(models.Model):
@@ -222,4 +219,4 @@ class Payment(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.code
+        return self.info

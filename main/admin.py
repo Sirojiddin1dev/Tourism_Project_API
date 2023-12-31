@@ -1,10 +1,5 @@
 from django.contrib import admin
-from .models import (
-    User, Image, LocationCategory, LocationSubCategory, Service, Hotel,
-    Room, RoomReservation, OrderFoodToRoom, CleaningRoom,
-    CarForRent, CarRental, Restaurant, MealCategory, Meal,
-    Table, Order, TableReservation, Delivery, Payment
-)
+from .models import *
 
 # Registering User model
 admin.site.register(User)
@@ -38,7 +33,7 @@ admin.site.register(Restaurant)
 admin.site.register(MealCategory)
 admin.site.register(Meal)
 admin.site.register(Table)
-admin.site.register(Order)
+admin.site.register(Comment)
 admin.site.register(TableReservation)
 admin.site.register(Delivery)
 
